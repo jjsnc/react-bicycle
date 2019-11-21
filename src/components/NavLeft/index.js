@@ -6,7 +6,7 @@
 */
 
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import MenuConfig from '../../config/menuConfig'
 import './index.less'
 const { SubMenu } = Menu;
@@ -24,18 +24,15 @@ export default class NavLfet extends Component {
 		return (
 			<div>
 				<div className="logo">
-					{/* <img src="/assets/logo-ant.svg" alt=""/> */}
 					<h1>Admin MS</h1>
 				</div>
-
 				<Menu theme="dark" mode="vertical">
-					{this.state.menuTreeNode}
+					{ this.state.menuTreeNode }
 				</Menu>
 			</div>
 		)
 	}
 	renderMenu = (data) => {
-		console.log(data, 'data')
 		return data.map((item) => {
 			if (item.children) {
 				return <SubMenu key={item.key} title={item.title}>
