@@ -5,13 +5,14 @@
 * @Last Modified time: 2019-11-18 09:03:12
 */
 
-import React,{Component} from 'react'
-
-
-export default class Footer extends Component{
-	render(){
-		return (
-            <div>Footer</div>
-			)
-	}
+import React from 'react'
+import './index.less'
+export default class Footer extends React.Component {
+    render() {
+        return (
+            <div className="footer">
+               版权所有：后台管理&Damon（推荐使用谷歌浏览器，可以获得更佳操作页面体验） 技术支持：Damon
+            </div>
+        );
+    }
 }

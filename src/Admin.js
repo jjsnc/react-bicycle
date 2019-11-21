@@ -11,6 +11,7 @@ import Header from './components/Header'
 import NavLeft from './components/NavLeft'
 import Footer from './components/Footer'
  import './style/common.less' 
+ import Home from './pages/home'
 export default class Admin extends  Component{
    render(){
    	return (
@@ -24,7 +25,7 @@ export default class Admin extends  Component{
                  	这是头部
                  </Header>
                  <Row className="content">
-                 	这是中间
+					 <Home />
                  	 {/*this.props.children */}
                  </Row>
                  <Footer>
