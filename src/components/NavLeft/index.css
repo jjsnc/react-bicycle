@@ -1,0 +1,21 @@
+/*
+* @Author: jjsnc
+* @Date:   2019-11-18 08:48:55
+* @Last Modified by:   jjsnc
+* @Last Modified time: 2019-11-18 08:48:57
+*/
+.nav-left .logo {
+  line-height: 90px;
+  padding-left: 20px;
+  background-color: #002140;
+}
+.nav-left .logo img {
+  height: 35px;
+}
+.nav-left .logo h1 {
+  color: #ffffff;
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 10px;
+}
