@@ -20,7 +20,7 @@ export default class NavLfet extends Component{
 		return (
             <div>
                  <div className="logo">
-                        <img src="/assets/logo-ant.svg" alt=""/>
+                        {/* <img src="/assets/logo-ant.svg" alt=""/> */}
                         <h1>Admin MS</h1>
                   </div>
             	  <Menu onClick={handleClick} theme="dark"  mode="vertical">
@@ -36,20 +36,12 @@ export default class NavLfet extends Component{
 				      <Menu.Item key="1">Option 1</Menu.Item>
 				      <Menu.Item key="2">Option 2</Menu.Item>
 				    </SubMenu>
-				    <SubMenu
-				      key="sub2"
-				      title={
-				        <span>
-				          <Icon type="appstore" />
-				          <span>Navigation Two</span>
-				        </span>
-				      }
-				    >
-				      <Menu.Item key="5">Option 5</Menu.Item>
-				      <Menu.Item key="6">Option 6</Menu.Item>
-				    </SubMenu>
 				  </Menu>
             </div>
 			)
+	}
+	// 菜单渲染
+	renderMenu = ()=>{
+		
 	}
 }
