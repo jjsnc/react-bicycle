@@ -1,19 +1,22 @@
-import React,{Component} from 'react'
-import {Card, Row, Col, Modal} from 'antd'
+import React, { Component } from 'react'
+import { Card, Row, Col, Modal } from 'antd'
 
 export default class Gallery extends Component {
-
-    state={
-        visible:false
+    constructor(props) {
+        super(props)
+        this.state = {
+            visible: false,
+            currentImg: '',
+        }
     }
 
-    openGallery = (imgSrc)=>{
+    openGallery = (imgSrc) => {
         this.setState({
-            visible:true,
-            currentImg: '/gallery/'+imgSrc
+            visible: true,
+            currentImg: '/gallery/' + imgSrc
         })
     }
-    render(){
+    render() {
         const imgs = [
             ['1.png', '2.png', '3.png', '4.png', '5.png'],
             ['6.png', '7.png', '8.png', '9.png', '10.png'],
@@ -21,10 +24,11 @@ export default class Gallery extends Component {
             ['16.png', '17.png', '18.png', '19.png', '20.png'],
             ['21.png', '22.png', '23.png', '24.png', '25.png']
         ]
-        const imgList = imgs.map((list) => list.map((item) => 
+        const imgList = imgs.map((list) => list.map((item) =>
             <Card
-                style={{marginBottom:10}}
-                cover={<img src={'/gallery/'+item} onClick={()=>this.openGallery(item)}/>}
+                style={{ marginBottom: 10 }}
+                key={item}
+                cover={<img alt='' src={'/gallery/' + item} onClick={() => this.openGallery(item)} />}
             >
                 <Card.Meta
                     title="React Admin"
@@ -56,14 +60,14 @@ export default class Gallery extends Component {
                     height={500}
                     visible={this.state.visible}
                     title="图片画廊"
-                    onCancel={()=>{
+                    onCancel={() => {
                         this.setState({
-                            visible:false
+                            visible: false
                         })
                     }}
                     footer={null}
                 >
-                   {<img src={this.state.currentImg} alt="" style={{width:'100%'}}/>}
+                    {<img src={this.state.currentImg} alt="" style={{ width: '100%' }} />}
                 </Modal>
             </div>
         );
