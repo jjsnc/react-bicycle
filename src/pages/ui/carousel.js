@@ -16,7 +16,7 @@ export default class Carousels extends Component{
                 <Card title="图片轮播" className="slider-wrap">
                     <Carousel autoplay effect="fade">
                         <div>
-                            <img src="/carousel-img/carousel-1.jpg" alt=""/>
+                            <img src="/carousel-img/carousel-1.jpg" alt="" style={{maxWidth:'100%',width:'100%'}} />
                         </div>
                         <div>
                             <img src="/carousel-img/carousel-2.jpg" alt="" />

@@ -12,7 +12,7 @@ import Notice from './pages/ui/notice'
 import Messages from './pages/ui/messages'
 import Tabs from './pages/ui/tabs'
 import Gallery from './pages/ui/gallery'
-// import Carousel from './pages/ui/carousel'
+import Carousel from './pages/ui/carousel'
 // import FormLogin from './pages/form/login'
 // import FormRegister from './pages/form/register'
 // import BasicTable from './pages/table/basicTable'
@@ -48,7 +48,7 @@ export default class ERouter extends Component {
                                     <Route path="/ui/messages" component={Messages} />
                                     <Route path="/ui/tabs" component={Tabs} />
                                     <Route path="/ui/gallery" component={Gallery} />
-                                    {/* <Route path="/ui/carousel" component={Carousel} /> */}
+                                    <Route path="/ui/carousel" component={Carousel} />
                                     {/* <Route path="/form/login" component={FormLogin} /> */}
                                     {/* <Route path="/form/reg" component={FormRegister} /> */}
                                     {/* <Route path="/table/basic" component={BasicTable} /> */}
