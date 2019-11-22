@@ -1,20 +1,16 @@
-import React, {Component} from 'react'
-import { Card, Button, Tabs, message, Icon } from 'antd'
+import React, { Component } from 'react'
+import { Card, Tabs, message, Icon } from 'antd'
 import './ui.less'
 const TabPane = Tabs.TabPane;
-export default class Buttons extends Component {
-
-    newTabIndex = 0;
-    handleCallback = (key)=>{
-        message.info("Hi,您选择了页签："+key)
-    }
-
-    componentWillMount(){
+let newTabIndex = 0;
+export default class MyTabs extends Component {
+    constructor(props) {
+        super(props)
         const panes = [
             {
-                title:'Tab 1',
+                title: 'Tab 1',
                 content: 'Tab 1',
-                key:'1'
+                key: '1'
             },
             {
                 title: 'Tab 2',
@@ -27,13 +23,15 @@ export default class Buttons extends Component {
                 key: '3'
             }
         ]
-        this.setState({
+        this.state = {
             activeKey: panes[0].key,
             panes
-        })
+        }
     }
-
-    onChange = (activeKey)=>{
+    handleCallback = (key) => {
+        message.info("Hi,您选择了页签：" + key)
+    }
+    onChange = (activeKey) => {
         this.setState({
             activeKey
         })
@@ -45,7 +43,7 @@ export default class Buttons extends Component {
 
     add = () => {
         const panes = this.state.panes;
-        const activeKey = `newTab${this.newTabIndex++}`;
+        const activeKey = `newTab${newTabIndex++}`;
         panes.push({ title: activeKey, content: 'New Tab Pane', key: activeKey });
         this.setState({ panes, activeKey });
     }
@@ -64,7 +62,7 @@ export default class Buttons extends Component {
         this.setState({ panes, activeKey });
     }
 
-    render(){
+    render() {
         return (
             <div>
                 <Card title="Tab页签" className="card-wrap">
@@ -82,15 +80,15 @@ export default class Buttons extends Component {
                     </Tabs>
                 </Card>
                 <Card title="Tab带图的页签" className="card-wrap">
-                    <Tabs 
+                    <Tabs
                         onChange={this.onChange}
                         activeKey={this.state.activeKey}
                         type="editable-card"
                         onEdit={this.onEdit}
                     >
                         {
-                            this.state.panes.map((panel)=>{
-                                return <TabPane 
+                            this.state.panes.map((panel) => {
+                                return <TabPane
                                     tab={panel.title}
                                     key={panel.key}
 
