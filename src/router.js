@@ -9,7 +9,7 @@ import Modals from './pages/ui/modals'
 // import NoMatch from './pages/nomatch'
 import Loadings from './pages/ui/loadings'
 import Notice from './pages/ui/notice'
-// import Messages from './pages/ui/messages'
+import Messages from './pages/ui/messages'
 // import Tabs from './pages/ui/tabs'
 // import Gallery from './pages/ui/gallery'
 // import Carousel from './pages/ui/carousel'
@@ -45,7 +45,7 @@ export default class ERouter extends Component {
                                     <Route path="/ui/modals" component={Modals} />
                                     <Route path="/ui/loadings" component={Loadings} />
                                     <Route path="/ui/notification" component={Notice} />
-                                    {/* <Route path="/ui/messages" component={Messages} /> */}
+                                    <Route path="/ui/messages" component={Messages} />
                                     {/* <Route path="/ui/tabs" component={Tabs} /> */}
                                     {/* <Route path="/ui/gallery" component={Gallery} /> */}
                                     {/* <Route path="/ui/carousel" component={Carousel} /> */}
