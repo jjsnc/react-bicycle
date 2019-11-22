@@ -1,8 +1,8 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Card, Button, Tabs, message, Icon } from 'antd'
 import './ui.less'
 const TabPane = Tabs.TabPane;
-export default class Buttons extends React.Component {
+export default class Buttons extends Component {
 
     newTabIndex = 0;
     handleCallback = (key)=>{

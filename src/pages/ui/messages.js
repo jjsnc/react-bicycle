@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Card, Button, message } from 'antd'
 import './ui.less'
-export default class Buttons extends React.Component {
+export default class Buttons extends Component {
 
     showMessage = (type)=>{
         message[type]("恭喜你，React课程晋级成功");
