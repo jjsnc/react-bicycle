@@ -3,8 +3,8 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import App from './App'
 import Login from './pages/login'
 import Admin from './Admin'
-// import Home from './pages/home';
-// import Buttons from './pages/ui/buttons'
+import Home from './pages/home';
+import Buttons from './pages/ui/buttons'
 // import Modals from './pages/ui/modals'
 // import NoMatch from './pages/nomatch'
 // import Loadings from './pages/ui/loadings'
@@ -37,7 +37,14 @@ export default class ERouter extends Component {
                 <App>
                     <Switch>
                         <Route path='/login' component={Login}></Route>
-                        <Route path='/admin' component={Admin}></Route>
+                        <Route path="/" render={()=>
+                            <Admin>
+                                <Switch>
+                                    <Route path='/home' component={Home} />
+                                    <Route path="/ui/buttons" component={Buttons} />
+                                </Switch>
+                            </Admin>         
+                        } />
                     </Switch>
                 </App>
             </HashRouter>

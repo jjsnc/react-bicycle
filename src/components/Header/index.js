@@ -17,7 +17,8 @@ export default class Header extends Component {
 			'userName': 'Damon',
 			'sysTime': '',
 			'dayPictureUrl': '',
-			'weather': ''
+			'weather': '',
+			'timer':''
 		}
 	}
 	componentDidMount() {
@@ -26,12 +27,18 @@ export default class Header extends Component {
 	}
 	// 实时获取系统时间
 	getNowDate = () => {
-		setInterval(() => {
+	  let timer = 	 setInterval(() => {
 			let sysTime = Util.formateDate(Date.now())
 			this.setState({
 				sysTime
 			})
 		}, 1000)
+		this.setState({
+			timer
+		})
+	}
+	componentWillUnmount(){
+		clearTimeout(this.state.timer)
 	}
 	// 获取天气的API
 	getWeatherAPIData() {

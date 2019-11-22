@@ -9,6 +9,7 @@ import React, { Component } from 'react'
 import { Menu } from 'antd';
 import MenuConfig from '../../config/menuConfig'
 import './index.less'
+import { NavLink } from 'react-router-dom'
 const { SubMenu } = Menu;
 
 
@@ -27,7 +28,7 @@ export default class NavLfet extends Component {
 					<h1>Admin MS</h1>
 				</div>
 				<Menu theme="dark" mode="vertical">
-					{ this.state.menuTreeNode }
+					{this.state.menuTreeNode}
 				</Menu>
 			</div>
 		)
