@@ -5,7 +5,7 @@ import './index.css';
 import Admin from './Admin';
 // import Home from './route_demo/route1/Home';
 // import Router from './route_demo/route2/router';
-import Router3 from './route_demo/route3/router';
+// import Router3 from './route_demo/route3/router';
 
 // import * as serviceWorker from './serviceWorker';
 
@@ -15,4 +15,4 @@ ReactDOM.render(<Admin />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-serviceWorker.unregister();
+// serviceWorker.unregister();
