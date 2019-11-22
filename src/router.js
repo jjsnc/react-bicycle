@@ -6,7 +6,7 @@ import Admin from './Admin'
 import Home from './pages/home';
 import Buttons from './pages/ui/buttons'
 // import Modals from './pages/ui/modals'
-// import NoMatch from './pages/nomatch'
+import NoMatch from './pages/nomatch'
 // import Loadings from './pages/ui/loadings'
 // import Notice from './pages/ui/notice'
 // import Messages from './pages/ui/messages'
@@ -42,6 +42,9 @@ export default class ERouter extends Component {
                                 <Switch>
                                     <Route path='/home' component={Home} />
                                     <Route path="/ui/buttons" component={Buttons} />
+                                    <Route path="/ui/buttons" component={Buttons} />
+                                    <Redirect to="/home" />
+                                    <Route component={NoMatch} />
                                 </Switch>
                             </Admin>         
                         } />
