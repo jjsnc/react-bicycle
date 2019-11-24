@@ -2,6 +2,30 @@ import React, { Component } from 'react';
 
 import { Table,Card } from 'antd'
 
+var Mock = require('mockjs')
+var data = Mock.mock({
+    "code": 0,
+    "message": "",
+    "result": {
+      "list|10": [{
+        "id|+1": 1,
+        "username": "@cname",
+        "sex|1-2": 1,
+        "state|1-5": 1,
+        "interest|1-8": 1,
+        "isMarried|0-1": 1,
+        "birthday": "2000-01-01",
+        "address": "北京市海淀区",
+        "time": "09:00:00"
+      }],
+      page: 1,
+      page_size: 10,
+      total_count: 30
+    }
+  })
+// 输出结果
+console.log(JSON.stringify(data, null, 4))
+
 
 export default class BasicTable extends Component {
     constructor(props) {
@@ -129,6 +153,14 @@ export default class BasicTable extends Component {
                         bordered
                         columns={columns}
                         dataSource={this.state.dataSource}
+                        pagination={false}
+                    />
+                </Card>
+                <Card title="动态数据渲染表格">
+                    <Table
+                        bordered
+                        columns={columns}
+                        dataSource={this.state.dataSourc2}
                         pagination={false}
                     />
                 </Card>
