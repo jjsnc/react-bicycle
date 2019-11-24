@@ -78,7 +78,6 @@ export default class BasicTable extends Component {
     }
     // 列表单选
     onRowClick = (record,index)=>{
-        console.log(record,index,'record,index')
         let selectKey = [index];
         Modal.info({
             title:'信息',
