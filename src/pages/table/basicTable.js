@@ -1,39 +1,19 @@
 import React, { Component } from 'react';
 
-import { Table,Card } from 'antd'
+import { Table, Card } from 'antd'
+import axios from 'axios'
+// import axios from './../../axios/index'
 
-var Mock = require('mockjs')
-var data = Mock.mock({
-    "code": 0,
-    "message": "",
-    "result": {
-      "list|10": [{
-        "id|+1": 1,
-        "username": "@cname",
-        "sex|1-2": 1,
-        "state|1-5": 1,
-        "interest|1-8": 1,
-        "isMarried|0-1": 1,
-        "birthday": "2000-01-01",
-        "address": "北京市海淀区",
-        "time": "09:00:00"
-      }],
-      page: 1,
-      page_size: 10,
-      total_count: 30
-    }
-  })
-// 输出结果
-console.log(JSON.stringify(data, null, 4))
 
 
 export default class BasicTable extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            dataSource: [],
             dataSource2: [],
-            params: 1,
-            dataSource: []
+            params: 1
+
         }
     }
     componentDidMount() {
@@ -73,8 +53,22 @@ export default class BasicTable extends Component {
             item.key = index;
             return null;
         })
-        this.setState({
-            dataSource: data
+        this.setState({ dataSource: data } )
+        this.request();
+
+    }
+    // 动态获取mock数据
+    // https://www.easy-mock.com/mock/5dda392df2b7914af934a6b3/mockapi/table/list#!method=get
+    // https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api/table/list?page=1
+    request = () => {
+        axios.get('https://www.easy-mock.com/mock/5dda392df2b7914af934a6b3/mockapi/table/list#!method=get').then((res) => {
+
+            let list = [...res.data.result.list]
+             list.map((item, index) => {
+                item.key = '1'+index
+                return null
+            })
+            this.setState({ dataSource2: list } )
         })
     }
     render() {
@@ -160,7 +154,7 @@ export default class BasicTable extends Component {
                     <Table
                         bordered
                         columns={columns}
-                        dataSource={this.state.dataSourc2}
+                        dataSource={this.state.dataSource2}
                         pagination={false}
                     />
                 </Card>
