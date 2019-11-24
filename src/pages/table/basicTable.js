@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { Table, Card } from 'antd'
-import axios from 'axios'
-// import axios from './../../axios/index'
+// import axios from 'axios'
+import axios from './../../axios/index'
 
 
 
@@ -61,9 +61,10 @@ export default class BasicTable extends Component {
     // https://www.easy-mock.com/mock/5dda392df2b7914af934a6b3/mockapi/table/list#!method=get
     // https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api/table/list?page=1
     request = () => {
-        axios.get('https://www.easy-mock.com/mock/5dda392df2b7914af934a6b3/mockapi/table/list#!method=get').then((res) => {
-
-            let list = [...res.data.result.list]
+        axios.ajax({
+            url:'table/list#!method=get'
+        }).then((res) => {
+            let list = [...res.result.list]
              list.map((item, index) => {
                 item.key = '1'+index
                 return null
