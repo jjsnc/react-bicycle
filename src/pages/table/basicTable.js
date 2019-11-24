@@ -62,7 +62,10 @@ export default class BasicTable extends Component {
     // https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api/table/list?page=1
     request = () => {
         axios.ajax({
-            url:'table/list#!method=get'
+            url:'table/list#!method=get',
+            data:{
+                isShowLoading:true
+            }
         }).then((res) => {
             let list = [...res.result.list]
              list.map((item, index) => {
