@@ -15,7 +15,7 @@ import Gallery from './pages/ui/gallery'
 import Carousel from './pages/ui/carousel'
 import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
-// import BasicTable from './pages/table/basicTable'
+import BasicTable from './pages/table/basicTable'
 // import HighTable from './pages/table/highTable'
 // import Rich from './pages/rich'
 // import City from './pages/city/index'
@@ -51,7 +51,7 @@ export default class ERouter extends Component {
                                     <Route path="/ui/carousel" component={Carousel} />
                                     <Route path="/form/login" component={FormLogin} />
                                     <Route path="/form/reg" component={FormRegister} />
-                                    {/* <Route path="/table/basic" component={BasicTable} /> */}
+                                    <Route path="/table/basic" component={BasicTable} />
                                     {/* <Route path="/table/high" component={HighTable} /> */}
                                     {/* <Route path='/rich' component={Rich} /> */}
                                     {/* <Route path="/city" component={City} /> */}
