@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Table, Card, Modal, Button,message } from 'antd'
+import { Table, Card, Modal, Button, message } from 'antd'
 // import axios from 'axios'
 import axios from './../../axios/index'
 
@@ -103,8 +103,8 @@ export default class BasicTable extends Component {
             onOk: () => {
                 message.success('删除成功');
                 this.setState({
-                    "selectedRowKeys":[],
-                    "selectedRows":''
+                    "selectedRowKeys": [],
+                    "selectedRows": ''
                 })
                 this.request();
             }
@@ -229,13 +229,21 @@ export default class BasicTable extends Component {
                         pagination={false}
                     />
                 </Card>
-                <Card title="Mock-多选选" >
+                <Card title="Mock-多选" >
                     <div style={{ marginBottom: 10 }}>
                         <Button onClick={this.handleDelete}>删除</Button>
                     </div>
                     <Table
                         bordered
                         rowSelection={rowCheckSelection}
+                        columns={columns}
+                        dataSource={this.state.dataSource2}
+                        pagination={false}
+                    />
+                </Card>
+                <Card title="Mock-表格分页" >
+                    <Table
+                        bordered
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         pagination={false}
