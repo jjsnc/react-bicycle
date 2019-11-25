@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Table, } from 'antd';
+import { Card, Table,Button,Badge} from 'antd';
 import axios from './../../axios/index'
 export default class HighTable extends Component {
     constructor(props) {
@@ -7,11 +7,48 @@ export default class HighTable extends Component {
         this.state = {
             page: 1,
             dataSource: [],
-            sortOrder:'descend'
+            sortOrder: 'descend'
         }
     }
     componentDidMount() {
-        this.request()
+        const data = [
+            {
+                id: '0',
+                userName: 'Jack',
+                sex: '1',
+                state: '1',
+                interest: '1',
+                birthday: '2000-01-01',
+                address: '北京市海淀区奥林匹克公园',
+                time: '09:00'
+            },
+            {
+                id: '1',
+                userName: 'Tom',
+                sex: '1',
+                state: '1',
+                interest: '1',
+                birthday: '2000-01-01',
+                address: '北京市海淀区奥林匹克公园',
+                time: '09:00'
+            },
+            {
+                id: '2',
+                userName: 'Lily',
+                sex: '1',
+                state: '1',
+                interest: '1',
+                birthday: '2000-01-01',
+                address: '北京市海淀区奥林匹克公园',
+                time: '10:00'
+            },
+        ]
+        data.map((item, index) => {
+            item.key = index;
+            return null;
+        })
+        this.setState({ dataSource: data })
+        // this.request()
     }
     //  动态获取mock 数据
     request = () => {
@@ -36,11 +73,25 @@ export default class HighTable extends Component {
             }
         })
     }
-    handleChange = (pagination, filters, sorter)=>{
+    // 排序
+    handleChange = (pagination, filters, sorter) => {
         console.log(sorter)
         this.setState({
-            sortOrder:sorter.order
+            sortOrder: sorter.order
         })
+    }
+    // 删除操作
+    handleDelete = (item) => {
+        // let id = item.id;
+        console.log(item)
+        // Modal.confirm({
+        //     title: '确认',
+        //     content: '您确认要删除此条数据吗？',
+        //     onOk: () => {
+        //         message.success('删除成功');
+        //         this.request();
+        //     }
+        // })
     }
     render() {
         const columns = [
@@ -270,69 +321,69 @@ export default class HighTable extends Component {
                 dataIndex: 'time'
             }
         ]
-        // const columns4 = [
-        //     {
-        //         title: 'id',
-        //         dataIndex: 'id'
-        //     },
-        //     {
-        //         title: '用户名',
-        //         dataIndex: 'userName'
-        //     },
-        //     {
-        //         title: '性别',
-        //         dataIndex: 'sex',
-        //         render(sex) {
-        //             return sex === 1 ? '男' : '女'
-        //         }
-        //     },
-        //     {
-        //         title: '年龄',
-        //         dataIndex: 'age'
-        //     },
-        //     {
-        //         title: '状态',
-        //         dataIndex: 'state',
-        //         render(state) {
-        //             let config = {
-        //                 '1': '咸鱼一条',
-        //                 '2': '风华浪子',
-        //                 '3': '北大才子',
-        //                 '4': '百度FE',
-        //                 '5': '创业者'
-        //             }
-        //             return config[state];
-        //         }
-        //     },
-        //     {
-        //         title: '爱好',
-        //         dataIndex: 'interest',
-        //         render(abc) {
-        //             let config = {
-        //                 '1': <Badge status="success" text="成功" />,
-        //                 '2': <Badge status="error" text="报错" />,
-        //                 '3': <Badge status="default" text="正常" />,
-        //                 '4': <Badge status="processing" text="进行中" />,
-        //                 '5': <Badge status="warning" text="警告" />
-        //             }
-        //             return config[abc];
-        //         }
-        //     },
-        //     {
-        //         title: '生日',
-        //         dataIndex: 'birthday'
-        //     },
-        //     {
-        //         title: '地址',
-        //         dataIndex: 'address'
-        //     },
-        //     {
-        //         title: '操作',
-        //         render: (text, item) => {
-        //             return <Button size="small" onClick={(item) => { this.handleDelete(item) }}>删除</Button>
-        //         }
-        //     }
-        // ]
+        const columns4 = [
+            {
+                title: 'id',
+                dataIndex: 'id'
+            },
+            {
+                title: '用户名',
+                dataIndex: 'userName'
+            },
+            {
+                title: '性别',
+                dataIndex: 'sex',
+                render(sex) {
+                    return sex === 1 ? '男' : '女'
+                }
+            },
+            {
+                title: '年龄',
+                dataIndex: 'age'
+            },
+            {
+                title: '状态',
+                dataIndex: 'state',
+                render(state) {
+                    let config = {
+                        '1': '咸鱼一条',
+                        '2': '风华浪子',
+                        '3': '北大才子',
+                        '4': '百度FE',
+                        '5': '创业者'
+                    }
+                    return config[state];
+                }
+            },
+            {
+                title: '爱好',
+                dataIndex: 'interest',
+                render(abc) {
+                    let config = {
+                        '1': <Badge status="success" text="成功" />,
+                        '2': <Badge status="error" text="报错" />,
+                        '3': <Badge status="default" text="正常" />,
+                        '4': <Badge status="processing" text="进行中" />,
+                        '5': <Badge status="warning" text="警告" />
+                    }
+                    return config[abc];
+                }
+            },
+            {
+                title: '生日',
+                dataIndex: 'birthday'
+            },
+            {
+                title: '地址',
+                dataIndex: 'address'
+            },
+            {
+                title: '操作',
+                render: (text, item) => {
+                    return <Button size="small" onClick={() => { this.handleDelete(item) }}>删除</Button>
+                }
+            }
+        ]
         return (
             <div>
                 <Card title="头部固定">
@@ -360,6 +411,14 @@ export default class HighTable extends Component {
                         dataSource={this.state.dataSource}
                         pagination={false}
                         onChange={this.handleChange}
+                    />
+                </Card>
+                <Card title="操作按钮" >
+                    <Table
+                        bordered
+                        columns={columns4}
+                        dataSource={this.state.dataSource}
+                        pagination={false}
                     />
                 </Card>
             </div>
