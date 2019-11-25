@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Table, Card, Modal, Button, message } from 'antd'
 // import axios from 'axios'
 import axios from './../../axios/index'
-
+import Utils from './../../utils/utils';
 
 
 export default class BasicTable extends Component {
@@ -12,9 +12,9 @@ export default class BasicTable extends Component {
         this.state = {
             dataSource: [],
             dataSource2: [],
-            params: 1,
-            selectedRowKeys: []
-
+            page: 1,
+            selectedRowKeys: [],
+            pagination: {}
         }
     }
     componentDidMount() {
@@ -62,10 +62,14 @@ export default class BasicTable extends Component {
     // https://www.easy-mock.com/mock/5dda392df2b7914af934a6b3/mockapi/table/list#!method=get
     // https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api/table/list?page=1
     request = () => {
+        let _this = this;
         axios.ajax({
             url: 'table/list#!method=get',
             data: {
-                isShowLoading: false
+                isShowLoading: false,
+                params: {
+                    page: this.state.page
+                }
             }
         }).then((res) => {
             let list = [...res.result.list]
@@ -73,7 +77,15 @@ export default class BasicTable extends Component {
                 item.key = index
                 return null
             })
-            this.setState({ dataSource2: list })
+            this.setState({
+                dataSource2: list,
+                pagination: Utils.pagination(res, (current) => {
+                    _this.setState({
+                        page: current
+                    })
+                    this.request();
+                })
+            })
         })
     }
     // 列表单选
@@ -246,7 +258,7 @@ export default class BasicTable extends Component {
                         bordered
                         columns={columns}
                         dataSource={this.state.dataSource2}
-                        pagination={false}
+                        pagination={this.state.pagination}
                     />
                 </Card>
             </div>
