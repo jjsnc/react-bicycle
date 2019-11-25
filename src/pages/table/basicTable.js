@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Table, Card, Modal} from 'antd'
+import { Table, Card, Modal, Button,message } from 'antd'
 // import axios from 'axios'
 import axios from './../../axios/index'
 
@@ -13,7 +13,7 @@ export default class BasicTable extends Component {
             dataSource: [],
             dataSource2: [],
             params: 1,
-            selectedRowKeys:[],
+            selectedRowKeys: []
 
         }
     }
@@ -54,7 +54,7 @@ export default class BasicTable extends Component {
             item.key = index;
             return null;
         })
-        this.setState({ dataSource: data } )
+        this.setState({ dataSource: data })
         this.request();
 
     }
@@ -63,31 +63,49 @@ export default class BasicTable extends Component {
     // https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api/table/list?page=1
     request = () => {
         axios.ajax({
-            url:'table/list#!method=get',
-            data:{
-                isShowLoading:false
+            url: 'table/list#!method=get',
+            data: {
+                isShowLoading: false
             }
         }).then((res) => {
             let list = [...res.result.list]
-             list.map((item, index) => {
+            list.map((item, index) => {
                 item.key = index
                 return null
             })
-            this.setState({ dataSource2: list } )
+            this.setState({ dataSource2: list })
         })
     }
     // 列表单选
-    onRowClick = (record,index)=>{
+    onRowClick = (record, index) => {
         let selectKey = [index];
         Modal.info({
-            title:'信息',
-            content:`用户名：${record.userName},用户爱好：${record.interest}`
+            title: '信息',
+            content: `用户名：${record.userName},用户爱好：${record.interest}`
         })
         this.setState({
-            selectedRowKeys:selectKey,
+            selectedRowKeys: selectKey,
             selectedItem: record
         })
     }
+
+    // 多选执行删除动作
+    handleDelete = (() => {
+        let rows = this.state.selectedRows;
+        let ids = [];
+        rows.map((item) => {
+            ids.push(item.id)
+            return null;
+        })
+        Modal.confirm({
+            title: '删除提示',
+            content: `您确定要删除这些数据吗？${ids.join(',')}`,
+            onOk: () => {
+                message.success('删除成功');
+                this.request();
+            }
+        })
+    })
     render() {
         const columns = [
             {
@@ -159,8 +177,19 @@ export default class BasicTable extends Component {
         ]
         let selectedRowKeys = this.state.selectedRowKeys;
         let rowSelection = {
-            type:'radio',
+            type: 'radio',
             selectedRowKeys
+        }
+        let rowCheckSelection = {
+            type: 'checkbox',
+            selectedRowKeys,
+            onChange: (selectedRowKeys, selectedRows) => {
+                this.setState({
+                    selectedRowKeys,
+                    selectedRows
+                })
+            }
+
         }
         return (
             <div>
@@ -184,13 +213,25 @@ export default class BasicTable extends Component {
                     <Table
                         bordered
                         rowSelection={rowSelection}
-                        onRow={(record,index) => {
+                        onRow={(record, index) => {
                             return {
-                                onClick:()=>{
-                                    this.onRowClick(record,index);
+                                onClick: () => {
+                                    this.onRowClick(record, index);
                                 }
                             };
                         }}
+                        columns={columns}
+                        dataSource={this.state.dataSource2}
+                        pagination={false}
+                    />
+                </Card>
+                <Card title="Mock-多选选" >
+                    <div style={{ marginBottom: 10 }}>
+                        <Button onClick={this.handleDelete}>删除</Button>
+                    </div>
+                    <Table
+                        bordered
+                        rowSelection={rowCheckSelection}
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         pagination={false}
