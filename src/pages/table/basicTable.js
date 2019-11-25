@@ -102,6 +102,10 @@ export default class BasicTable extends Component {
             content: `您确定要删除这些数据吗？${ids.join(',')}`,
             onOk: () => {
                 message.success('删除成功');
+                this.setState({
+                    "selectedRowKeys":[],
+                    "selectedRows":''
+                })
                 this.request();
             }
         })
