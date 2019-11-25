@@ -64,7 +64,7 @@ export default class BasicTable extends Component {
     request = () => {
         let _this = this;
         axios.ajax({
-            url: 'table/list#!method=get',
+            url: 'table/list',
             data: {
                 isShowLoading: false,
                 params: {
