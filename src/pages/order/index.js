@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Utils from '../../utils/utils'
 // import axios from './../../axios/index';
 import axios from 'axios';
-import { Card, Button, Table, Form, Select, DatePicker } from 'antd'
+import { Card, Button, Table, Form, Select, DatePicker, Modal, message } from 'antd'
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 // 使用 Mock
 // var Mock = require('mockjs')
 // var data = Mock.mock({
-    
+
 //         "code": '0',
 //         "result": {
 //           "page|1-9": 1,
@@ -32,7 +32,7 @@ const Option = Select.Option;
 //             "user_pay": 300
 //           }]
 //         }
-      
+
 // })
 // // 输出结果
 // console.log(JSON.stringify(data, null, 4))
@@ -41,7 +41,10 @@ export default class Order extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            page: 1
+            page: 1,
+            orderInfo:{},
+            orderConfirmVisble:false,
+            selectedRowKeys:[]
         }
     }
     onRowClick = (record, index) => {
@@ -56,10 +59,10 @@ export default class Order extends Component {
     }
     requestList = () => {
         let _this = this;
-        axios.get('/api/order/list.json',{
+        axios.get('/api/order/list.json', {
             page: this.state.page
         }).then((res) => {
-            var data  = res.data
+            var data = res.data
             let list = data.result.item_list.map((item, index) => {
                 item.key = index;
                 return item;
@@ -72,6 +75,57 @@ export default class Order extends Component {
                 })
             })
         })
+    }
+    // 订单结束确认
+    handleConfirm = () => {
+        let item = this.state.selectedItem;
+        if (!item) {
+            Modal.info({
+                title: '信息',
+                content: '请选择一条订单进行结束'
+            })
+            return;
+        }
+        axios.get('/api/order/ebike_info.json', {
+            orderId: item.id
+        }).then((res) => {
+            let data = res.data
+            if (data.code === 0 || data.code === "0") {
+                this.setState({
+                    orderInfo: data.result,
+                    orderConfirmVisble: true
+                })
+            }
+        })
+    }
+
+    // 结束订单
+    handleFinishOrder = () => {
+        let item = this.state.selectedItem;
+        axios.get('/api/order/finish_order.json', {
+            orderId: item.id
+        }).then((res) => {
+            let data = res.data
+            if (data.code === 0 ||  data.code === "0") {
+                message.success('订单结束成功')
+                this.setState({
+                    orderConfirmVisble: false
+                })
+                this.requestList();
+            }
+        })
+    }
+    // 订单详情
+    openOrderDetail = ()=>{
+        let item = this.state.selectedItem;
+        if (!item) {
+            Modal.info({
+                title: '信息',
+                content: '请先选择一条订单'
+            })
+            return;
+        }
+        window.open(`/#/common/order/detail/${item.id}`,'_blank')
     }
     render() {
         const columns = [
@@ -123,21 +177,31 @@ export default class Order extends Component {
                 dataIndex: 'user_pay'
             }
         ]
+        const formItemLayout = {
+            labelCol:{span:5},
+            wrapperCol:{span:19}
+        }
+        const selectedRowKeys = this.state.selectedRowKeys;
+        const rowSelection = {
+            type: 'radio',
+            selectedRowKeys
+        }
         return (
             <div>
                 <Card>
                     <FilterForm />
                 </Card>
                 <Card>
-                    <Button> 订单详情</Button>
-                    <Button> 结束订单</Button>
+                    <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
+                    <Button type="primary" onClick={this.handleConfirm}>结束订单</Button>
                 </Card>
                 <div className="content-wrap">
-                    <Table
+                <Table
                         bordered
                         columns={columns}
                         dataSource={this.state.list}
                         pagination={this.state.pagination}
+                        rowSelection={rowSelection}
                         onRow={(record, index) => {
                             return {
                                 onClick: () => {
@@ -147,6 +211,32 @@ export default class Order extends Component {
                         }}
                     />
                 </div>
+                <Modal
+                    title="结束订单"
+                    visible={this.state.orderConfirmVisble}
+                    onCancel={() => {
+                        this.setState({
+                            orderConfirmVisble: false
+                        })
+                    }}
+                    onOk={this.handleFinishOrder}
+                    width={600}
+                >
+                    <Form layout="horizontal">
+                        <FormItem label="车辆编号" {...formItemLayout}>
+                            {this.state.orderInfo.bike_sn}
+                        </FormItem>
+                        <FormItem label="剩余电量" {...formItemLayout}>
+                            {this.state.orderInfo.battery + '%'}
+                        </FormItem>
+                        <FormItem label="行程开始时间" {...formItemLayout}>
+                            {this.state.orderInfo.start_time}
+                        </FormItem>
+                        <FormItem label="当前位置" {...formItemLayout}>
+                            {this.state.orderInfo.location}
+                        </FormItem>
+                    </Form>
+                </Modal>
             </div>
         )
     }

@@ -1,10 +1,10 @@
 {
-  "code":'0',
+  "code":"0",
   "result": {
     "id": 27296,
     "bike_sn": "800116116",
     "battery": 100,
-    "start_time": "@datetime",
+    "start_time": "2019-12-23",
     "location": "北京市海淀区奥林匹克公园"
   }
 }
