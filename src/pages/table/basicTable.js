@@ -70,7 +70,7 @@ export default class BasicTable extends Component {
         }).then((res) => {
             let list = [...res.result.list]
              list.map((item, index) => {
-                item.key = '1'+index
+                item.key = index
                 return null
             })
             this.setState({ dataSource2: list } )
@@ -192,7 +192,7 @@ export default class BasicTable extends Component {
                             };
                         }}
                         columns={columns}
-                        dataSource={this.state.dataSource}
+                        dataSource={this.state.dataSource2}
                         pagination={false}
                     />
                 </Card>
