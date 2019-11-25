@@ -20,8 +20,8 @@ import HighTable from './pages/table/highTable'
 // import Rich from './pages/rich'
 import City from './pages/city/index'
 import Order from './pages/order/index'
-// import Common from './common'
-// import OrderDetail from './pages/order/detail'
+import Common from './common'
+import OrderDetail from './pages/order/detail'
 // import BikeMap from './pages/map/bikeMap'
 // import User from './pages/user/index'
 // import Bar from './pages/echarts/bar/index'
@@ -37,6 +37,12 @@ export default class ERouter extends Component {
                 <App>
                     <Switch>
                         <Route path='/login' component={Login}></Route>
+                        <Route path="/common" render={() =>
+                            <Common>
+                                <Route path="/common/order/detail/:orderId" component={OrderDetail} />
+                            </Common>
+                        }
+                        />
                         <Route path="/" render={() =>
                             <Admin>
                                 <Switch>
