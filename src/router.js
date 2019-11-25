@@ -18,7 +18,7 @@ import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
 import HighTable from './pages/table/highTable'
 // import Rich from './pages/rich'
-// import City from './pages/city/index'
+import City from './pages/city/index'
 // import Order from './pages/order/index'
 // import Common from './common'
 // import OrderDetail from './pages/order/detail'
@@ -54,7 +54,7 @@ export default class ERouter extends Component {
                                     <Route path="/table/basic" component={BasicTable} />
                                     <Route path="/table/high" component={HighTable} />
                                     {/* <Route path='/rich' component={Rich} /> */}
-                                    {/* <Route path="/city" component={City} /> */}
+                                    <Route path="/city" component={City} />
                                     {/* <Route path="/order" component={Order} /> */}
                                     {/* <Route path='/bikeMap' component={BikeMap} /> */}
                                     {/* <Route path='/user' component={User} /> */}
