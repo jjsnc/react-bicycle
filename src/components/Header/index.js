@@ -69,7 +69,7 @@ export default class Header extends Component {
 					}
 					<Col span={menuType ? 18 : 24}>
 						<span>欢迎，{this.state.userName}</span>
-						<a href="#">退出</a>
+						<span>退出</span>
 					</Col>
 				</Row>
 				{
