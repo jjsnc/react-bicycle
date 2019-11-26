@@ -27,7 +27,9 @@ const rowObject = {
     minRows: 4, maxRows: 6
 }
 
-
+function onChange(date, dateString) {
+    console.log(date.format("YYYY-MM-DD"),dateString,'6666');
+  }
 
 class FormRegister extends Component {
     constructor(props) {
@@ -53,7 +55,7 @@ class FormRegister extends Component {
     }
     handleSubmit = () => {
         let userInfo = this.props.form.getFieldsValue();
-        console.log(userInfo)
+        console.log(userInfo.birthday.value,'userInfo.birthday')
     }
 
     handleChange = info => {
@@ -173,6 +175,7 @@ class FormRegister extends Component {
                             <DatePicker
                                 showTime
                                 format="YYYY-MM-DD HH:mm:ss"
+                                onChange={onChange}
                             />
                         )
                     }

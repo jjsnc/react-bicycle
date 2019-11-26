@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Utils from '../../utils/utils'
 // import axios from './../../axios/index';
 import axios from 'axios';
-import { Card, Button, Table, Form, Select, DatePicker, Modal, message } from 'antd'
+import { Card, Button, Table, Form, Modal, message } from 'antd'
+import BaseForm from '../../components/BaseForm'
 const FormItem = Form.Item;
-const Option = Select.Option;
-
 // 使用 Mock
 // var Mock = require('mockjs')
 // var data = Mock.mock({
@@ -42,11 +41,38 @@ export default class Order extends Component {
         super(props)
         this.state = {
             page: 1,
-            orderInfo:{},
-            orderConfirmVisble:false,
-            selectedRowKeys:[]
+            orderInfo: {},
+            orderConfirmVisble: false,
+            selectedRowKeys: []
         }
     }
+    formList = [
+        {
+            type: 'SELECT',
+            label: '城市',
+            field: 'city',
+            placeholder: '全部',
+            initialValue: '1',
+            key: '001',
+            width: 80,
+            list: [{ id: '0', name: '全部' }, { id: '1', name: '北京' }, { id: '2', name: '天津' }, { id: '3', name: '上海' }]
+        },
+        {
+            type: '时间查询',
+            key: '002',
+        }
+        ,
+        {
+            type: 'SELECT',
+            label: '订单状态',
+            field: 'order_status',
+            key: '003',
+            placeholder: '全部',
+            initialValue: '1',
+            width: 80,
+            list: [{ id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }]
+        }
+    ]
     onRowClick = (record, index) => {
         let selectKey = [index];
         this.setState({
@@ -56,6 +82,10 @@ export default class Order extends Component {
     }
     componentDidMount() {
         this.requestList()
+    }
+    handleFilter = (params) => {
+        this.params = params;
+        this.requestList();
     }
     requestList = () => {
         let _this = this;
@@ -106,7 +136,7 @@ export default class Order extends Component {
             orderId: item.id
         }).then((res) => {
             let data = res.data
-            if (data.code === 0 ||  data.code === "0") {
+            if (data.code === 0 || data.code === "0") {
                 message.success('订单结束成功')
                 this.setState({
                     orderConfirmVisble: false
@@ -116,7 +146,7 @@ export default class Order extends Component {
         })
     }
     // 订单详情
-    openOrderDetail = ()=>{
+    openOrderDetail = () => {
         let item = this.state.selectedItem;
         if (!item) {
             Modal.info({
@@ -125,7 +155,7 @@ export default class Order extends Component {
             })
             return;
         }
-        window.open(`/#/common/order/detail/${item.id}`,'_blank')
+        window.open(`/#/common/order/detail/${item.id}`, '_blank')
     }
     render() {
         const columns = [
@@ -178,25 +208,26 @@ export default class Order extends Component {
             }
         ]
         const formItemLayout = {
-            labelCol:{span:5},
-            wrapperCol:{span:19}
+            labelCol: { span: 5 },
+            wrapperCol: { span: 19 }
         }
         const selectedRowKeys = this.state.selectedRowKeys;
         const rowSelection = {
             type: 'radio',
             selectedRowKeys
         }
+
         return (
             <div>
                 <Card>
-                    <FilterForm />
+                    <BaseForm  formList={this.formList} filterSubmit={this.handleFilter} />
                 </Card>
                 <Card>
                     <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
                     <Button type="primary" onClick={this.handleConfirm}>结束订单</Button>
                 </Card>
                 <div className="content-wrap">
-                <Table
+                    <Table
                         bordered
                         columns={columns}
                         dataSource={this.state.list}
@@ -244,61 +275,61 @@ export default class Order extends Component {
 
 
 
-class FilterForm extends React.Component {
+// class FilterForm extends React.Component {
 
-    render() {
-        const { getFieldDecorator } = this.props.form;
-        return (
-            <Form layout="inline">
-                <FormItem label="城市">
-                    {
-                        getFieldDecorator('city_id')(
-                            <Select
-                                style={{ width: 100 }}
-                                placeholder="全部"
-                            >
-                                <Option value="">全部</Option>
-                                <Option value="1">北京市</Option>
-                                <Option value="2">天津市</Option>
-                                <Option value="3">深圳市</Option>
-                            </Select>
-                        )
-                    }
-                </FormItem>
-                <FormItem label="订单时间">
-                    {
-                        getFieldDecorator('start_time')(
-                            <DatePicker />
-                        )
-                    }
-                </FormItem>
-                <FormItem>
-                    {
-                        getFieldDecorator('end_time')(
-                            <DatePicker />
-                        )
-                    }
-                </FormItem>
-                <FormItem label="订单状态">
-                    {
-                        getFieldDecorator('op_mode')(
-                            <Select
-                                style={{ width: 80 }}
-                                placeholder="全部"
-                            >
-                                <Option value="">全部</Option>
-                                <Option value="1">进行中</Option>
-                                <Option value="2">结束</Option>
-                            </Select>
-                        )
-                    }
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" style={{ margin: '0 20px' }}>查询</Button>
-                    <Button>重置</Button>
-                </FormItem>
-            </Form>
-        );
-    }
-}
-FilterForm = Form.create({})(FilterForm);
+//     render() {
+//         const { getFieldDecorator } = this.props.form;
+//         return (
+//             <Form layout="inline">
+//                 <FormItem label="城市">
+//                     {
+//                         getFieldDecorator('city_id')(
+//                             <Select
+//                                 style={{ width: 100 }}
+//                                 placeholder="全部"
+//                             >
+//                                 <Option value="">全部</Option>
+//                                 <Option value="1">北京市</Option>
+//                                 <Option value="2">天津市</Option>
+//                                 <Option value="3">深圳市</Option>
+//                             </Select>
+//                         )
+//                     }
+//                 </FormItem>
+//                 <FormItem label="订单时间">
+//                     {
+//                         getFieldDecorator('start_time')(
+//                             <DatePicker />
+//                         )
+//                     }
+//                 </FormItem>
+//                 <FormItem>
+//                     {
+//                         getFieldDecorator('end_time')(
+//                             <DatePicker />
+//                         )
+//                     }
+//                 </FormItem>
+//                 <FormItem label="订单状态">
+//                     {
+//                         getFieldDecorator('op_mode')(
+//                             <Select
+//                                 style={{ width: 80 }}
+//                                 placeholder="全部"
+//                             >
+//                                 <Option value="">全部</Option>
+//                                 <Option value="1">进行中</Option>
+//                                 <Option value="2">结束</Option>
+//                             </Select>
+//                         )
+//                     }
+//                 </FormItem>
+//                 <FormItem>
+//                     <Button type="primary" style={{ margin: '0 20px' }}>查询</Button>
+//                     <Button>重置</Button>
+//                 </FormItem>
+//             </Form>
+//         );
+//     }
+// }
+// FilterForm = Form.create({})(FilterForm);
