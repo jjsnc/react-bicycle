@@ -23,7 +23,7 @@ export default class Order extends React.Component {
                 this.setState({
                     orderInfo: data.result
                 })
-                this.renderMap(data.result);
+                // this.renderMap(data.result);
             }
         })
     }
@@ -113,7 +113,7 @@ export default class Order extends React.Component {
         return (
             <div>
                 <Card>
-                    <div id="orderDetailMap" className="order-map"></div>
+                    {/* <div id="orderDetailMap" className="order-map"></div> */}
                     <div className="detail-items">
                         <div className="item-title">基础信息</div>
                         <ul className="detail-form">
