@@ -27,7 +27,7 @@ import User from './pages/user/index'
 import Bar from './pages/echarts/bar/index'
 import Pie from './pages/echarts/pie/index'
 import Line from './pages/echarts/line/index'
-// import Permission from './pages/permission'
+import Permission from './pages/permission'
 // import renderEmpty from 'antd/lib/config-provider/renderEmpty'
 
 export default class ERouter extends Component {
@@ -67,7 +67,7 @@ export default class ERouter extends Component {
                                     <Route path="/charts/bar" component={Bar} />
                                     <Route path="/charts/pie" component={Pie} />
                                     <Route path="/charts/line" component={Line} />
-                                    {/* <Route path="/permission" component={Permission} /> */}
+                                    <Route path="/permission" component={Permission} />
                                     {/* <Redirect to="/home" />
                                     <Route component={NoMatch} /> */}
                                 </Switch>
