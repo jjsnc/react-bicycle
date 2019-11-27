@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
-import { Card, Button, Modal, Form, Select, Input } from 'antd';
+import { Card, Button, Modal, Form, Select, Input,Tree } from 'antd';
 import axios from 'axios'
 import ETable from '../../components/ETable/index'
 import Utils from '../../utils/utils'
+import menuConfig from '../../config/menuConfig'
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+const TreeNode = Tree.TreeNode;
 export default class Permission extends Component {
     constructor(props) {
         super(props)
@@ -15,7 +16,8 @@ export default class Permission extends Component {
             selectedItem: '',
             selectedIds: '',
             list: [],
-            isRoleVisible: false
+            isRoleVisible: false,
+            isPermVisible: false
         }
     }
     handleRole = () => {
@@ -26,7 +28,39 @@ export default class Permission extends Component {
     }
     handlePermission = () => {
         console.log('设置权限')
+        if (!this.state.selectedItem) {
+            Modal.info({
+                title: '信息',
+                content: '请选择一个角色'
+            })
+            return;
+        }
+        this.setState({
+            isPermVisible: true,
+            detailInfo: this.state.selectedItem
+        });
+        let menuList = this.state.selectedItem.menus;
+        this.setState({
+            menuInfo: menuList
+        })
 
+    }
+    handlePermEditSubmit = () => {
+        let data = this.roleForm.props.form.getFieldsValue();
+        data.role_id = this.state.selectedItem.id;
+        data.menus = this.state.menuInfo;
+        axios.post('/api/permission/edit.json', {
+            params: {
+                ...data
+            }
+        }).then((res) => {
+            if (res) {
+                this.setState({
+                    isPermVisible: false
+                })
+                this.requestList();
+            }
+        })
     }
     handleUserAuth = () => {
         console.log('用户授权')
@@ -60,7 +94,7 @@ export default class Permission extends Component {
                 ...data
             }
         }).then((res) => {
-            console.log(res,'res')
+            console.log(res, 'res')
             if (res) {
                 this.setState({
                     isRoleVisible: false
@@ -114,7 +148,7 @@ export default class Permission extends Component {
                         selectedIds={this.state.selectedIds}
                         selectedItem={this.state.selectedItem}
                         dataSource={this.state.list}
-                        rowSelection={"checkbox"}
+                        rowSelection={"radio"}
                         columns={columns}
                     />
                 </div>
@@ -130,6 +164,28 @@ export default class Permission extends Component {
                     }}
                 >
                     <RoleForm wrappedComponentRef={(inst) => this.roleForm = inst} />
+                </Modal>
+                {/* 设置权限 */}
+                <Modal
+                    title="权限设置"
+                    visible={this.state.isPermVisible}
+                    width={600}
+                    onOk={this.handlePermEditSubmit}
+                    onCancel={() => {
+                        this.setState({
+                            isPermVisible: false
+                        })
+                    }}>
+                    <PermEditForm
+                        wrappedComponentRef={(inst) => this.roleForm = inst}
+                        detailInfo={this.state.detailInfo}
+                        menuInfo={this.state.menuInfo || []}
+                        patchMenuInfo={(checkedKeys) => {
+                            this.setState({
+                                menuInfo: checkedKeys
+                            });
+                        }}
+                    />
                 </Modal>
             </div>
         )
@@ -176,3 +232,81 @@ class RoleForm extends React.Component {
     }
 }
 RoleForm = Form.create({})(RoleForm);
+
+// 设置权限
+class PermEditForm extends React.Component {
+    state = {};
+    // 设置选中的节点，通过父组件方法再传递回来
+    onCheck = (checkedKeys) => {
+        this.props.patchMenuInfo(checkedKeys);
+    };
+    renderTreeNodes = (data, key = '') => {
+        return data.map((item) => {
+            let parentKey = key + item.key;
+            if (item.children) {
+                return (
+                    <TreeNode title={item.title} key={parentKey} dataRef={item} className="op-role-tree">
+                        {this.renderTreeNodes(item.children, parentKey)}
+                    </TreeNode>
+                );
+            } else if (item.btnList) {
+                return (
+                    <TreeNode title={item.title} key={parentKey} dataRef={item} className="op-role-tree">
+                        {this.renderBtnTreedNode(item, parentKey)}
+                    </TreeNode>
+                );
+            }
+            return <TreeNode {...item} />;
+        });
+    };
+
+    renderBtnTreedNode = (menu, parentKey = '') => {
+        const btnTreeNode = []
+        menu.btnList.forEach((item) => {
+            console.log(parentKey + '-btn-' + item.key);
+            btnTreeNode.push(<TreeNode title={item.title} key={parentKey + '-btn-' + item.key} className="op-role-tree" />);
+        })
+        return btnTreeNode;
+    }
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 18 }
+        };
+        const detail_info = this.props.detailInfo;
+        const menuInfo = this.props.menuInfo;
+        return (
+            <Form layout="horizontal">
+                <FormItem label="角色名称：" {...formItemLayout}>
+                    <Input disabled maxLength={8} placeholder={detail_info.role_name} />
+                </FormItem>
+                <FormItem label="状态：" {...formItemLayout}>
+                    {getFieldDecorator('status', {
+                        initialValue: '1'
+                    })(
+                        <Select style={{ width: 80 }}
+                            placeholder="启用"
+                        >
+                            <Option value="1">启用</Option>
+                            <Option value="0">停用</Option>
+                        </Select>
+                    )}
+                </FormItem>
+                <Tree
+                    checkable
+                    defaultExpandAll
+                    onCheck={(checkedKeys) => this.onCheck(checkedKeys)}
+                    checkedKeys={menuInfo || []}
+                >
+                    <TreeNode title="平台权限" key="platform_all">
+                        {this.renderTreeNodes(menuConfig)}
+                    </TreeNode>
+                </Tree>
+            </Form>
+        )
+    }
+}
+
+PermEditForm = Form.create({})(PermEditForm);
