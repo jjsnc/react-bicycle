@@ -1,39 +1,11 @@
 import React, { Component } from 'react'
 
-import { Card, Button } from 'antd';
+import { Card, Button, Modal, Form, Select, Input } from 'antd';
 import axios from 'axios'
 import ETable from '../../components/ETable/index'
 import Utils from '../../utils/utils'
-
-
-// var Mock = require('mockjs')
-// var data = Mock.mock({
-//     "code": 0,
-//     "result": {
-//         "page": 1,
-//         "page_size": 10,
-//         "total_count": 25,
-//         "page_count": 3,
-//         "item_list|7": [{
-//             "id|+1": 1,
-//             "role_name": /(管理人员)|(客服专员)|(财务专员)|(市场专员)|(人力专员)|(研发)|(测试)|(系统管理员)/,
-//             "status|0-1": 1,
-//             "authorize_user_name": "@cname",
-//             "authorize_time": 1521270166000,
-//             "create_time": 1499305790000,
-//             "menus": ["/home", "/ui/buttons", "/ui/modals", "/ui/loadings", "/ui/notification", "/ui/messages", "/ui/tabs", "/ui/gallery", "/ui/carousel", "/ui"]
-//         }]
-//     }
-// })
-// // 输出结果
-// console.log(JSON.stringify(data, null, 4))
-
-
-
-
-
-
-
+const FormItem = Form.Item;
+const Option = Select.Option;
 
 export default class Permission extends Component {
     constructor(props) {
@@ -42,11 +14,15 @@ export default class Permission extends Component {
             selectedRowKeys: [],
             selectedItem: '',
             selectedIds: '',
-            list: []
+            list: [],
+            isRoleVisible: false
         }
     }
     handleRole = () => {
         console.log('创建角色')
+        this.setState({
+            isRoleVisible: true
+        })
     }
     handlePermission = () => {
         console.log('设置权限')
@@ -73,6 +49,23 @@ export default class Permission extends Component {
                 this.setState({
                     list
                 })
+            }
+        })
+    }
+    handleRoleSubmit = () => {
+        console.log('handleRoleSubmit')
+        let data = this.roleForm.props.form.getFieldsValue();
+        axios.get('/api/role/create.json', {
+            params: {
+                ...data
+            }
+        }).then((res) => {
+            console.log(res,'res')
+            if (res) {
+                this.setState({
+                    isRoleVisible: false
+                })
+                this.requestList();
             }
         })
     }
@@ -125,7 +118,61 @@ export default class Permission extends Component {
                         columns={columns}
                     />
                 </div>
+                <Modal
+                    title="创建角色"
+                    visible={this.state.isRoleVisible}
+                    onOk={this.handleRoleSubmit}
+                    onCancel={() => {
+                        this.roleForm.props.form.resetFields();
+                        this.setState({
+                            isRoleVisible: false
+                        })
+                    }}
+                >
+                    <RoleForm wrappedComponentRef={(inst) => this.roleForm = inst} />
+                </Modal>
             </div>
         )
     }
 }
+
+
+
+
+
+// 角色创建
+class RoleForm extends React.Component {
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 16 }
+        };
+        return (
+            <Form layout="horizontal">
+                <FormItem label="角色名称" {...formItemLayout}>
+                    {
+                        getFieldDecorator('role_name', {
+                            initialValue: ''
+                        })(
+                            <Input type="text" placeholder="请输入角色名称" />
+                        )
+                    }
+                </FormItem>
+                <FormItem label="状态" {...formItemLayout}>
+                    {
+                        getFieldDecorator('state', {
+                            initialValue: 1
+                        })(
+                            <Select>
+                                <Option value={1}>开启</Option>
+                                <Option value={0}>关闭</Option>
+                            </Select>
+                        )}
+                </FormItem>
+            </Form>
+        );
+    }
+}
+RoleForm = Form.create({})(RoleForm);
