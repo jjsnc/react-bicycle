@@ -24,7 +24,6 @@ export default class ETable extends Component {
                     selectedItem.splice(i, 1);
                 }
             } else {
-                console.log(666)
                 selectedIds = [record.id];
                 selectedRowKeys = [index]
                 selectedItem = [record];
