@@ -22,7 +22,7 @@ import City from './pages/city/index'
 import Order from './pages/order/index'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
-// import BikeMap from './pages/map/bikeMap'
+import BikeMap from './pages/map/bikeMap'
 import User from './pages/user/index'
 // import Bar from './pages/echarts/bar/index'
 // import Pie from './pages/echarts/pie/index'
@@ -62,7 +62,7 @@ export default class ERouter extends Component {
                                     {/* <Route path='/rich' component={Rich} /> */}
                                     <Route path="/city" component={City} />
                                     <Route path="/order" component={Order} />
-                                    {/* <Route path='/bikeMap' component={BikeMap} /> */}
+                                    <Route path='/bikeMap' component={BikeMap} />
                                     <Route path='/user' component={User} />
                                     {/* <Route path="/charts/bar" component={Bar} /> */}
                                     {/* <Route path="/charts/pie" component={Pie} /> */}
