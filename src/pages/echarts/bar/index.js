@@ -1,6 +1,7 @@
 import React from 'react'
 // 引入 ECharts 主模块
 import echarts from 'echarts'
+// 按需加载
 // import echarts from 'echarts/lib/echarts'
 import ReactEcharts from 'echarts-for-react';
 import echartTheme from '../echartTheme'
