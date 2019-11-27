@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Utils from '../../utils/utils'
 // import axios from './../../axios/index';
 import axios from 'axios';
-import { Card, Button, Table, Form, Modal, message } from 'antd'
+import { Card, Button, Form, Modal, message } from 'antd'
 import BaseForm from '../../components/BaseForm'
+import ETable from '../../components/ETable'
 const FormItem = Form.Item;
 // 使用 Mock
 // var Mock = require('mockjs')
@@ -43,8 +44,10 @@ export default class Order extends Component {
             page: 1,
             orderInfo: {},
             orderConfirmVisble: false,
-            selectedRowKeys: []
-        }
+            selectedRowKeys: [],
+            selectedItem:'',
+            selectedIds:''
+         }
     }
     formList = [
         {
@@ -73,13 +76,13 @@ export default class Order extends Component {
             list: [{ id: '0', name: '全部' }, { id: '1', name: '进行中' }, { id: '2', name: '结束行程' }]
         }
     ]
-    onRowClick = (record, index) => {
-        let selectKey = [index];
-        this.setState({
-            selectedRowKeys: selectKey,
-            selectedItem: record
-        })
-    }
+    // onRowClick = (record, index) => {
+    //     let selectKey = [index];
+    //     this.setState({
+    //         selectedRowKeys: selectKey,
+    //         selectedItem: record
+    //     })
+    // }
     componentDidMount() {
         this.requestList()
     }
@@ -211,23 +214,33 @@ export default class Order extends Component {
             labelCol: { span: 5 },
             wrapperCol: { span: 19 }
         }
-        const selectedRowKeys = this.state.selectedRowKeys;
-        const rowSelection = {
-            type: 'radio',
-            selectedRowKeys
-        }
+        // const selectedRowKeys = this.state.selectedRowKeys;
+        // const rowSelection = {
+        //     type: 'radio',
+        //     selectedRowKeys
+        // }
 
         return (
             <div>
                 <Card>
-                    <BaseForm  formList={this.formList} filterSubmit={this.handleFilter} />
+                    <BaseForm formList={this.formList} filterSubmit={this.handleFilter} />
                 </Card>
                 <Card>
                     <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
                     <Button type="primary" onClick={this.handleConfirm}>结束订单</Button>
                 </Card>
                 <div className="content-wrap">
-                    <Table
+                    {<ETable
+                        updateSelectItem = {Utils.updateSelectedItem.bind(this)}
+                        columns={columns}
+                        dataSource={this.state.list}
+                        selectedRowKeys= {this.state.selectedRowKeys}
+                        selectedIds= {this.state.selectedIds}
+                        selectedItem = {this.state.selectedItem}
+                        pagination={this.state.pagination}
+                        rowSelection={"checkbox"}
+                    />}
+                    {/* <Table
                         bordered
                         columns={columns}
                         dataSource={this.state.list}
@@ -240,7 +253,8 @@ export default class Order extends Component {
                                 }
                             };
                         }}
-                    />
+                    /> */}
+
                 </div>
                 <Modal
                     title="结束订单"
