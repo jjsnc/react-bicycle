@@ -231,7 +231,7 @@ export default class Order extends Component {
                 </Card>
                 <div className="content-wrap">
                     {<ETable
-                        updateSelectItem = {Utils.updateSelectedItem.bind(this)}
+                        updateSelectedItem = {Utils.updateSelectedItem.bind(this)}
                         columns={columns}
                         dataSource={this.state.list}
                         selectedRowKeys= {this.state.selectedRowKeys}

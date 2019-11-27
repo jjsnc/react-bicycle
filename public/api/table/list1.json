@@ -2,19 +2,120 @@
   "code": 0,
   "message": "",
   "result": {
-    "list|10": [{
-      "id|+1": 1,
-      "username": "@cname",
-      "sex|1-2": 1,
-      "state|1-5": 1,
-      "interest|1-8": 1,
-      "isMarried|0-1": 1,
-      "birthday": "2000-01-01",
-      "address": "北京市海淀区",
-      "time": "09:00:00"
-    }],
-    page: 1,
-    page_size: 10,
-    total_count: 30
+      "list": [
+          {
+              "id": 1,
+              "username": "蒋丽",
+              "sex": 2,
+              "state": 3,
+              "interest": 8,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 2,
+              "username": "邓娜",
+              "sex": 2,
+              "state": 4,
+              "interest": 6,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 3,
+              "username": "孔杰",
+              "sex": 1,
+              "state": 4,
+              "interest": 4,
+              "isMarried": 1,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 4,
+              "username": "顾刚",
+              "sex": 1,
+              "state": 4,
+              "interest": 2,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 5,
+              "username": "郝芳",
+              "sex": 1,
+              "state": 5,
+              "interest": 1,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 6,
+              "username": "宋杰",
+              "sex": 2,
+              "state": 3,
+              "interest": 4,
+              "isMarried": 1,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 7,
+              "username": "白超",
+              "sex": 1,
+              "state": 4,
+              "interest": 3,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 8,
+              "username": "彭娜",
+              "sex": 1,
+              "state": 2,
+              "interest": 2,
+              "isMarried": 1,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 9,
+              "username": "任超",
+              "sex": 1,
+              "state": 2,
+              "interest": 4,
+              "isMarried": 1,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          },
+          {
+              "id": 10,
+              "username": "黄丽",
+              "sex": 1,
+              "state": 5,
+              "interest": 7,
+              "isMarried": 0,
+              "birthday": "2000-01-01",
+              "address": "北京市海淀区",
+              "time": "09:00:00"
+          }
+      ],
+      "page": 1,
+      "page_size": 10,
+      "total_count": 30
   }
 }

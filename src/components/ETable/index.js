@@ -6,10 +6,10 @@ import { Table } from 'antd'
 
 export default class ETable extends Component {
     onSelectChange(record, index) {
-        // this.props.updateSelectItem(record, index)
+        // this.props.updateSelectedItem(record, index)
     }
     onRowClick = (record, index) => {
-        let { rowSelection, updateSelectItem, selectedRowKeys, selectedIds, selectedItem } = this.props
+        let { rowSelection, updateSelectedItem, selectedRowKeys, selectedIds, selectedItem } = this.props
         if (rowSelection === 'checkbox') {
             selectedItem = selectedItem || []
             if (selectedIds) {
@@ -28,11 +28,11 @@ export default class ETable extends Component {
                 selectedRowKeys = [index]
                 selectedItem = [record];
             }
-            updateSelectItem(selectedRowKeys, selectedItem, selectedIds)
+            updateSelectedItem(selectedRowKeys, selectedItem, selectedIds)
         } else {
             let selectedRowKeys = [index]
             let selectedItem = record
-            updateSelectItem(selectedRowKeys, selectedItem)
+            updateSelectedItem(selectedRowKeys, selectedItem)
         }
 
     }
