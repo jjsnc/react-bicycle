@@ -1,54 +1,64 @@
 import React from 'react'
-import {Card} from 'antd'
+
+import echarts from 'echarts'
 import ReactEcharts from 'echarts-for-react';
-import echartTheme from '../echartTheme'
 import themeLight from '../themeLight'
-// import echarts from 'echarts'
-import echarts from 'echarts/lib/echarts'
+import { Card } from 'antd'
+// import echarts from 'echarts/lib/echarts'
 // 引入饼图和折线图
-import 'echarts/lib/chart/pie'
+// import 'echarts/lib/chart/pie'
 // 引入提示框和标题组件
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/legend';
-import 'echarts/lib/component/markPoint';
-export default class Bar extends React.Component {
-
-    state = {}
-
-    componentWillMount(){
-        echarts.registerTheme('Imooc',themeLight);
+// import 'echarts/lib/component/tooltip';
+// import 'echarts/lib/component/title';
+// import 'echarts/lib/component/legend';
+// import 'echarts/lib/component/markPoint';
+export default class Pie extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showPie: false,
+            showPieTow: false,
+            showPieThre: false
+        }
+    }
+    componentDidMount() {
+        echarts.registerTheme('Imooc', themeLight);
+        this.setState({
+            showPie: true,
+            showPieTow: true,
+            showPieThre: true
+        })
     }
 
     getOption() {
         let option = {
             title: {
                 text: '用户骑行订单',
-                x : 'center'
+                x: 'center'
             },
-            legend : {
+            legend: {
                 orient: 'vertical',
                 right: 10,
                 top: 20,
                 bottom: 20,
-                data: ['周一','周二','周三','周四','周五','周六','周日']
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
             },
             tooltip: {
-                trigger : 'item',
-                formatter : "{a} <br/>{b} : {c} ({d}%)"
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
             series: [
                 {
-                    name : '订单量',
-                    type : 'pie',
-                    radius : '55%',
-                    center : [
+                    name: '订单量',
+                    type: 'pie',
+                    radius: '55%',
+                    center: [
                         '50%', '60%'
                     ],
-                    data:[
+                    data: [
                         {
-                            value:1000,
-                            name:'周一'
+                            value: 1000,
+                            name: '周一'
                         },
                         {
                             value: 1000,
@@ -75,7 +85,7 @@ export default class Bar extends React.Component {
                             name: '周日'
                         },
                     ],
-                    itemStyle : {
+                    itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
                             shadowOffsetX: 0,
@@ -231,28 +241,34 @@ export default class Bar extends React.Component {
         return (
             <div>
                 <Card title="饼形图表之一">
-                    <ReactEcharts
-                        option={this.getOption()}
-                        theme="Imooc"
-                        notMerge={true}
-                        lazyUpdate={true}
-                        style={{ height: 500 }}/>
+                    {this.state.showPie &&
+                        <ReactEcharts
+                            option={this.getOption()}
+                            theme="Imooc"
+                            notMerge={true}
+                            lazyUpdate={true}
+                            style={{ height: 500 }} />
+                    }
                 </Card>
-                <Card title="饼形图之二" style={{marginTop:10}}>
-                    <ReactEcharts
-                        option={this.getOption2()}
-                        theme="Imooc"
-                        notMerge={true}
-                        lazyUpdate={true}
-                        style={{ height: 500 }}/>
+                <Card title="饼形图之二" style={{ marginTop: 10 }}>
+                    {this.state.showPieTow &&
+                        <ReactEcharts
+                            option={this.getOption2()}
+                            theme="Imooc"
+                            notMerge={true}
+                            lazyUpdate={true}
+                            style={{ height: 500 }} />
+                    }
                 </Card>
-                <Card title="饼形图之三" style={{marginTop:10}}>
-                    <ReactEcharts
-                        option={this.getOption3()}
-                        theme="Imooc"
-                        notMerge={true}
-                        lazyUpdate={true}
-                        style={{ height: 500 }}/>
+                <Card title="饼形图之三" style={{ marginTop: 10 }}>
+                    {this.state.showPieThre &&
+                        <ReactEcharts
+                            option={this.getOption3()}
+                            theme="Imooc"
+                            notMerge={true}
+                            lazyUpdate={true}
+                            style={{ height: 500 }} />
+                    }
                 </Card>
             </div>
         );
