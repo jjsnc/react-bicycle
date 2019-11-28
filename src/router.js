@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import App from './App'
 import Login from './pages/login'
 import Admin from './Admin'
@@ -68,8 +68,8 @@ export default class ERouter extends Component {
                                     <Route path="/charts/pie" component={Pie} />
                                     <Route path="/charts/line" component={Line} />
                                     <Route path="/permission" component={Permission} />
-                                    {/* <Redirect to="/home" />
-                                    <Route component={NoMatch} /> */}
+                                    <Redirect to="/home" />
+                                    {/* <Route component={NoMatch} /> */}
                                 </Switch>
                             </Admin>
                         } />
