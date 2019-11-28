@@ -8,6 +8,7 @@
 import React, { Component } from 'react'
 import { Menu } from 'antd';
 import MenuConfig from '../../config/menuConfig'
+import { NavLink } from 'react-router-dom'
 import './index.less'
 // import { NavLink } from 'react-router-dom'
 const { SubMenu } = Menu;
@@ -40,7 +41,9 @@ export default class NavLfet extends Component {
 					{this.renderMenu(item.children)}
 				</SubMenu>
 			}
-			return <SubMenu key={item.key} title={item.title}></SubMenu>
+			return <Menu.Item title={item.title} key={item.key}>
+				<NavLink to={item.key}>{item.title}</NavLink>
+			</Menu.Item>
 		})
 	}
 	componentDidMount() {
