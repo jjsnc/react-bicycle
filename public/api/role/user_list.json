@@ -1,8 +1,105 @@
 {
   "code": 0,
-  "result|20": [{
-    "status|0-1": 0,
-    "user_id|+1": 1,
-    "user_name": "@cname"
-  }]
+  "result": [
+      {
+          "status": 1,
+          "user_id": 1,
+          "user_name": "孔娜"
+      },
+      {
+          "status": 1,
+          "user_id": 2,
+          "user_name": "薛刚"
+      },
+      {
+          "status": 0,
+          "user_id": 3,
+          "user_name": "史芳"
+      },
+      {
+          "status": 1,
+          "user_id": 4,
+          "user_name": "贺军"
+      },
+      {
+          "status": 1,
+          "user_id": 5,
+          "user_name": "贺丽"
+      },
+      {
+          "status": 1,
+          "user_id": 6,
+          "user_name": "侯杰"
+      },
+      {
+          "status": 0,
+          "user_id": 7,
+          "user_name": "汪强"
+      },
+      {
+          "status": 1,
+          "user_id": 8,
+          "user_name": "于霞"
+      },
+      {
+          "status": 1,
+          "user_id": 9,
+          "user_name": "阎洋"
+      },
+      {
+          "status": 0,
+          "user_id": 10,
+          "user_name": "崔敏"
+      },
+      {
+          "status": 1,
+          "user_id": 11,
+          "user_name": "田丽"
+      },
+      {
+          "status": 0,
+          "user_id": 12,
+          "user_name": "邓刚"
+      },
+      {
+          "status": 0,
+          "user_id": 13,
+          "user_name": "贺桂英"
+      },
+      {
+          "status": 0,
+          "user_id": 14,
+          "user_name": "龙洋"
+      },
+      {
+          "status": 1,
+          "user_id": 15,
+          "user_name": "廖洋"
+      },
+      {
+          "status": 0,
+          "user_id": 16,
+          "user_name": "谢艳"
+      },
+      {
+          "status": 1,
+          "user_id": 17,
+          "user_name": "张艳"
+      },
+      {
+          "status": 1,
+          "user_id": 18,
+          "user_name": "冯娟"
+      },
+      {
+          "status": 1,
+          "user_id": 19,
+          "user_name": "杨艳"
+      },
+      {
+          "status": 0,
+          "user_id": 20,
+          "user_name": "陈明"
+      }
+  ]
 }
