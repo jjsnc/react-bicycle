@@ -20,10 +20,8 @@
                   "/ui/loadings",
                   "/ui/notification",
                   "/ui/messages",
-                  "/ui/tabs",
                   "/ui/gallery",
-                  "/ui/carousel",
-                  "/ui"
+                  "/ui/carousel"
               ]
           },
           {
