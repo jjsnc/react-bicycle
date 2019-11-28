@@ -22,13 +22,16 @@ export default class NavLfet extends Component {
 			'menuTreeNode': ""
 		}
 	}
+	handleClick=(item, key)=>{
+    //    console.log(item, key, 'item key')
+	}
 	render() {
 		return (
 			<div>
 				<div className="logo">
 					<h1>Admin MS</h1>
 				</div>
-				<Menu theme="dark" mode="vertical">
+				<Menu theme="dark" mode="vertical" onClick={this.handleClick}>
 					{this.state.menuTreeNode}
 				</Menu>
 			</div>
