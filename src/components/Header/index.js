@@ -10,7 +10,8 @@ import { Row, Col } from 'antd';
 import Util from '../../utils/utils'
 import axios from '../../axios'
 import './index.less'
-export default class Header extends Component {
+import { connect } from 'react-redux'
+ class Header extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -93,3 +94,12 @@ export default class Header extends Component {
 		)
 	}
 }
+
+
+
+const mapStateToProps = state => {
+    return {
+        menuName: state.menuName
+    }
+};
+export default connect(mapStateToProps)(Header)
