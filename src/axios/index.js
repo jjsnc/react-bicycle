@@ -18,7 +18,6 @@ export default class Axios {
 
     static ajax(options) {
         let loading;
-        
         if (options.data && options.data.isShowLoading !== false) {
             loading = document.getElementById('ajaxLoading');
             loading.style.display = 'block';

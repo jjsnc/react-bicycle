@@ -23,6 +23,7 @@ import Order from './pages/order/index'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
 import BikeMap from './pages/map/bikeMap'
+import IndiaMap from './pages/map/IndiaMap'
 import User from './pages/user/index'
 import Bar from './pages/echarts/bar/index'
 import Pie from './pages/echarts/pie/index'
@@ -63,6 +64,7 @@ export default class ERouter extends Component {
                                     <Route path="/city" component={City} />
                                     <Route path="/order" component={Order} />
                                     <Route path='/bikeMap' component={BikeMap} />
+                                    <Route path='/indiaMap' component={IndiaMap} />                                   
                                     <Route path='/user' component={User} />
                                     <Route path="/charts/bar" component={Bar} />
                                     <Route path="/charts/pie" component={Pie} />
