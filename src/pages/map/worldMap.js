@@ -201,7 +201,7 @@ export default class Bar extends React.Component {
         };
         var data = [
           {
-            name: '北京',
+            name: '北京11',
             value: Math.round(Math.random() * 180)
           }, {
             name: '天津',
@@ -434,7 +434,7 @@ export default class Bar extends React.Component {
     render() {
         return (
             <div>
-                <Card title="中国地图">
+                <Card title="世界地图">
                    <div id="bar-wrap" style={{width:'100%', height:'600px'}}>111</div>
                 </Card>
             </div>
