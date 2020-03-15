@@ -23,7 +23,7 @@ export default class Axios {
             loading.style.display = 'block';
         }
    
-        let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api';
+        let baseApi = 'http://106.12.220.186:4000/api';
         return new Promise((resolve, reject) => {
             axios({
                 url: options.url,
