@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 //引入echarts主模块
 import echarts from 'echarts/lib/echarts';
-import Bmap from 'echarts/extension/bmap/bmap';
+// import Bmap from 'echarts/extension/bmap/bmap';
 import 'echarts/map/js/china';
 //引入地图和柱状图
 import 'echarts/lib/chart/map';
@@ -10,14 +10,6 @@ import 'echarts/lib/chart/bar';
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
-function renderItem(params, api) {
-
-
-    return {
-   
-    };
-}
-
 export default class EchartsMinigrate extends Component {
      constructor(props){
        super(props)
