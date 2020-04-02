@@ -70,7 +70,7 @@ import { connect } from 'react-redux'
 					}
 					<Col span={menuType ? 18 : 24}>
 						<span>欢迎，{this.state.userName}</span>
-						<span>退出</span>
+						<span className="btn">退出</span>
 					</Col>
 				</Row>
 				{
