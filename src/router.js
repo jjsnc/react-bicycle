@@ -23,13 +23,12 @@ import Order from './pages/order/index'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
 import BikeMap from './pages/map/bikeMap'
-// import IndiaMap from './pages/map/IndiaMap'
-import WorldMap from './pages/map/worldMap'
-import BlueWorldMap from './pages/map/blueWorldMap'
+
 import User from './pages/user/index'
 import Bar from './pages/echarts/bar/index'
 import Pie from './pages/echarts/pie/index'
 import Line from './pages/echarts/line/index'
+import WorldMap from './pages/map/worldMap'
 import Permission from './pages/permission'
 // import renderEmpty from 'antd/lib/config-provider/renderEmpty'
 
@@ -65,15 +64,12 @@ export default class ERouter extends Component {
                                     <Route path='/rich' component={Rich} />
                                     <Route path="/city" component={City} />
                                     <Route path="/order" component={Order} />
-                                    <Route path='/bikeMap' component={BikeMap} />
-                                    {/* <Route path='/indiaMap' component={IndiaMap} />   */}
-                                    <Route path='/worldMap' component={WorldMap} />    
-                                    <Route path='/blueWorldMap' component={BlueWorldMap} />    
-                                                                                                      
+                                    <Route path='/bikeMap' component={BikeMap} />                                                                                            
                                     <Route path='/user' component={User} />
                                     <Route path="/charts/bar" component={Bar} />
                                     <Route path="/charts/pie" component={Pie} />
                                     <Route path="/charts/line" component={Line} />
+                                    <Route path='/charts/worldMap' component={WorldMap} />      
                                     <Route path="/permission" component={Permission} />
                                     <Redirect to="/home" />
                                     {/* <Route component={NoMatch} /> */}
